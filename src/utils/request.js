@@ -2,6 +2,8 @@ import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
 import { getToken } from '@/utils/auth'
+import Vue from 'vue'
+import {startLoading,endLoading,showLoading,hideLoading} from './loading'
 
 // create an axios instance
 const service = axios.create({
@@ -13,6 +15,7 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
+    showLoading()
     if (store.getters.token) {
       // config.headers['token'] = getToken()
       config.headers.Authorization = 'Bearer ' + getToken()
@@ -20,6 +23,7 @@ service.interceptors.request.use(
     return config
   },
   error => {
+    hideLoading()
     // do something with request error
     console.log(error) // for debug
     return Promise.reject(error)
@@ -31,7 +35,7 @@ service.interceptors.response.use(
   
   response => {
     const res = response.data
-
+    hideLoading()
     // if the custom code is not 20000, it is judged as an error.
     return res 
   },
@@ -42,6 +46,7 @@ service.interceptors.response.use(
       type: 'error',
       duration: 5 * 1000
     })
+    hideLoading()
     return Promise.reject(error)
   }
 )
