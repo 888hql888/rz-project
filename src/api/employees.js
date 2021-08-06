@@ -6,5 +6,18 @@ const getEmployeeList = (params) => {
       params
     })
 }
+const delEmployee = (id) => {
+  return request({
+    url: `/sys/user/${id}`,
+    method: 'delete'
+  })
+}
 
-export { getEmployeeList } 
+const addEmployee = (data) => {
+  return request({
+    method: 'post',
+    url: '/sys/user',
+    data
+  })
+}
+export { getEmployeeList , delEmployee ,addEmployee} 
