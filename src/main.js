@@ -15,9 +15,12 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+//注册全局组件
 import Component from '@/components'
 Vue.use(Component) // 注册自己的插件
 
+import Print from 'vue-print-nb'
+Vue.use(Print);
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
