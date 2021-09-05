@@ -14,7 +14,7 @@ Vue.use(Router)
 /* Layout */
 import Layout from '@/layout'
 
-//静态路由
+//静态路由 不需要权限控制
 export const constantRoutes = [
   {
     path: '/login',
@@ -50,10 +50,10 @@ export const constantRoutes = [
     }]
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 
-//动态路由
+//动态路由 权限控制
 export const asyncRoutes = [
   approvalsRouter,
   departmentsRouter,
@@ -69,7 +69,7 @@ export const asyncRoutes = [
 const createRouter = () => new Router({
   // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: [...constantRoutes, ...asyncRoutes] // 临时合并所有的路由
+  routes: [...constantRoutes] // 临时合并所有的路由
 })
 
 const router = createRouter()
@@ -79,5 +79,6 @@ export function resetRouter() {
   const newRouter = createRouter()
   router.matcher = newRouter.matcher // reset router
 }
+
 
 export default router
