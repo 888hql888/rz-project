@@ -32,7 +32,7 @@
               <el-table-column align="center" prop="description" label="描述" />
               <el-table-column align="center" label="操作">
                 <template slot-scope="scope">
-                  <el-button size="small" type="success" @click="dispatchRole(scope)">分配权限</el-button>
+                  <el-button size="small" type="success" @click="$refs.dispatchRole.assignPerm(scope.row.id)">分配权限</el-button>
                 <el-button size="small" type="primary">编辑</el-button>
                 <el-button size="small" type="danger" @click="deleteRole(scope.row.id)"
                   >删除</el-button
@@ -110,12 +110,12 @@
       </el-card>
       <addRole v-model="showDialog" @updateRoleData="getRoleList" />
       <!-- 分配权限 -->
-      <dispatch-role v-model="disDialog" />
+      <dispatch-role v-model="disDialog" ref="dispatchRole" />
     </div>
   </div>
 </template>
 <script>
-import { getRoleList, getCompanyInfo,deleteRole } from "@/api/setting";
+import { getRoleList, getCompanyInfo,deleteRole} from "@/api/setting";
 import { mapGetters } from "vuex";
 import addRole from "./components/addRole.vue";
 import dispatchRole from "./components/dispatchRole.vue";
@@ -151,10 +151,6 @@ export default {
     this.getCompanyInfo();
   },
   methods: {
-    //分配权限
-    dispatchRole(row){
-      this.disDialog = true
-    },
     async getRoleList() {
       const res = await getRoleList(this.page);
       if (res.code != 10000) return;

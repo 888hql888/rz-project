@@ -42,6 +42,10 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+//权限控制 全局混入
+import mixinPermission from '@/mixins/permission'
+Vue.mixin(mixinPermission)
+
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明

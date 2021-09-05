@@ -1,8 +1,8 @@
 
 //递归生成 树形结构
-const getTreeData = (arr) => {
+const getTreeData = (arr,pid='') => {
     var a1 = arr.filter(item => {
-        return item.pid === ''
+        return item.pid === pid
     })
     var fn = (arr2, allarr) => {
         arr2.map(item2 => {

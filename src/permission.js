@@ -5,6 +5,8 @@ import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import getPageTitle from '@/utils/get-page-title'
+import {asyncRoutes} from '@/router'
+
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
@@ -33,8 +35,12 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           await store.dispatch('user/getInfo')
-
-          next()
+          const routes = await store.dispatch('routes/getPermissionRoute')
+          // routes.push(asyncRoutes.settingRouter)
+          // router.addRoutes(routes)
+          router.addRoutes([...routes, { path: '*', redirect: '/404', hidden: true }])
+          console.log(router,'路由权限....')
+          next(to.path)
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')

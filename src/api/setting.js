@@ -24,6 +24,21 @@ const deleteRole = (id) => {
     method: 'delete'
   })
 }
+// 给角色分配权限
+const  assignPerm = (data) => {
+  return request({
+    url: '/sys/role/assignPrem',
+    method: 'put',
+    data
+  })
+}
+//获取角色详情
+const getRoleDetail = (id) =>{
+  return request({
+    url:`/sys/role/${id}`
+  })
+}
 
 
-export {getRoleList,getCompanyInfo,addRole,deleteRole}
+
+export {getRoleList,getCompanyInfo,addRole,deleteRole,assignPerm,getRoleDetail}

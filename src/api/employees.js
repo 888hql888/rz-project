@@ -81,6 +81,16 @@ const updateJob = (data) => {
     data
   })
 }
+/** *
+ * 给用户分配角色
+ * ***/
+const assignRoles = (data) => {
+  return request({
+    url: '/sys/user/assignRoles',
+    data,
+    method: 'put'
+  })
+}
 export {
   getEmployeeList , 
   delEmployee ,
@@ -90,5 +100,6 @@ export {
   getPersonalDetail,
   updatePersonal,
   getJobDetail,
-  updateJob
+  updateJob,
+  assignRoles
 } 
