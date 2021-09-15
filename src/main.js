@@ -29,10 +29,10 @@ Vue.use(Print);
  * Currently MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
-if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
+// if (process.env.NODE_ENV === 'production') {
+//   const { mockXHR } = require('../mock')
+//   mockXHR()
+// }
 //全局注册过滤器
 import * as filters from '@/filters' // 引入工具类
 // 注册全局的过滤器
